@@ -1,4 +1,9 @@
 # Portfolio
+
+<p>If you found this project useful or interesting, please consider giving it a star! ⭐️</p>
+
+### Overview
+
 <p>Design and development of a 3D portfolio application that displays professional achievements and projects. The application is fully functional and includes integrated navigation to improve the user experience. With its responsive design, the application guarantees an optimal viewing experience on all devices and screen sizes.</p>
 
 ### Screenshot
