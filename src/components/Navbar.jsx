@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 import { styles } from "../styles";
-import { navLinks } from "../constants";
-import { logo, menu, close } from "../assets";
+import { navLinks } from "../constants/navLinks";
+import { logo, close, menu } from "../assets";
 
 const Navbar = () => {
   const [active, setActive] = useState("");
@@ -11,17 +10,8 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      if (scrollTop > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 100);
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -34,22 +24,14 @@ const Navbar = () => {
       }`}
     >
       <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
-        <Link
-          to="/"
-          className="flex items-center gap-2"
-          onClick={() => {
-            setActive("");
-            window.scrollTo(0, 0);
-          }}
-        >
+        <Link to="/" className="flex items-center gap-2">
           <img
             src={logo}
             alt="logo"
-            className="w-[80px] h-[80px] object-contain"
+            className="w-9 h-9 object-contain"
           />
           <p className="text-white text-[18px] font-bold cursor-pointer flex ">
-            Mishael &nbsp;
-            <span className="sm:block hidden"> | Keidar</span>
+            Mishael&nbsp;<span className="sm:block hidden">| Keidar</span>
           </p>
         </Link>
 
@@ -62,7 +44,7 @@ const Navbar = () => {
               } hover:text-white text-[18px] font-medium cursor-pointer`}
               onClick={() => setActive(nav.title)}
             >
-              <a href={`#${nav.id}`}>{nav.title}</a>
+              <Link to={`#${nav.id}`}>{nav.title}</Link>
             </li>
           ))}
         </ul>
@@ -77,7 +59,7 @@ const Navbar = () => {
 
           <div
             className={`${
-              !toggle ? "hidden" : "flex"
+              toggle ? "flex" : "hidden"
             } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
           >
             <ul className="list-none flex justify-end items-start flex-1 flex-col gap-4">
@@ -92,7 +74,7 @@ const Navbar = () => {
                     setActive(nav.title);
                   }}
                 >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
+                  <Link to={`#${nav.id}`}>{nav.title}</Link>
                 </li>
               ))}
             </ul>

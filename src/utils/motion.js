@@ -1,3 +1,26 @@
+const getXYValues = (direction) => {
+  let xValue, yValue;
+
+  if (direction === "left") {
+    xValue = 100;
+    yValue = 0;
+  } else if (direction === "right") {
+    xValue = -100;
+    yValue = 0;
+  } else if (direction === "up") {
+    xValue = 0;
+    yValue = 100;
+  } else if (direction === "down") {
+    xValue = 0;
+    yValue = -100;
+  } else {
+    xValue = 0;
+    yValue = 0;
+  }
+
+  return { xValue, yValue };
+};
+
 export const textVariant = (delay) => {
     return {
       hidden: {
@@ -17,10 +40,11 @@ export const textVariant = (delay) => {
   };
   
   export const fadeIn = (direction, type, delay, duration) => {
+    const { xValue, yValue } = getXYValues(direction);
     return {
       hidden: {
-        x: direction === "left" ? 100 : direction === "right" ? -100 : 0,
-        y: direction === "up" ? 100 : direction === "down" ? -100 : 0,
+        x: xValue,
+        y: yValue,
         opacity: 0,
       },
       show: {
@@ -57,10 +81,11 @@ export const textVariant = (delay) => {
   };
   
   export const slideIn = (direction, type, delay, duration) => {
+    const { xValue, yValue } = getXYValues(direction);
     return {
       hidden: {
-        x: direction === "left" ? "-100%" : direction === "right" ? "100%" : 0,
-        y: direction === "up" ? "100%" : direction === "down" ? "100%" : 0,
+        x: xValue,
+        y: yValue,
       },
       show: {
         x: 0,

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatedDiv } from "./dynamic";
 import emailjs from "@emailjs/browser";
 
 import { styles } from "../styles";
@@ -72,7 +72,7 @@ const Contact = () => {
     <div
       className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}
     >
-      <motion.div
+      <AnimatedDiv
         variants={slideIn("left", "tween", 0.2, 1)}
         className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
       >
@@ -125,14 +125,14 @@ const Contact = () => {
             {loading ? "Sending..." : "Send"}
           </button>
         </form>
-      </motion.div>
+      </AnimatedDiv>
 
-      <motion.div
+      <AnimatedDiv
         variants={slideIn("right", "tween", 0.2, 1)}
         className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]"
       >
         <EarthCanvas />
-      </motion.div>
+      </AnimatedDiv>
     </div>
   );
 };

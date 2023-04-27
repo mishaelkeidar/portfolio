@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
+import { AnimatedThreeFiberCanvas } from "../dynamic";
 import {
   Decal,
   Float,
@@ -7,11 +7,10 @@ import {
   Preload,
   useTexture,
 } from "@react-three/drei";
-
 import CanvasLoader from "../Loader";
 
-const Ball = (props) => {
-  const [decal] = useTexture([props.imgUrl]);
+const Ball = ({ imgUrl }) => {
+  const decal = useTexture(imgUrl);
 
   return (
     <Float speed={1.75} rotationIntensity={1} floatIntensity={2}>
@@ -37,21 +36,18 @@ const Ball = (props) => {
   );
 };
 
-const BallCanvas = ({ icon }) => {
-  return (
-    <Canvas
-      frameloop="demand"
-      dpr={[1, 2]}
-      gl={{ preserveDrawingBuffer: true }}
-    >
-      <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls enableZoom={false} />
-        <Ball imgUrl={icon} />
-      </Suspense>
-
-      <Preload all />
-    </Canvas>
-  );
-};
+const BallCanvas = ({ icon }) => (
+  <AnimatedThreeFiberCanvas
+    frameloop="demand"
+    dpr={[1, 2]}
+    gl={{ preserveDrawingBuffer: true }}
+  >
+    <Suspense fallback={<CanvasLoader />}>
+      <OrbitControls enableZoom={false} />
+      <Ball imgUrl={icon} />
+    </Suspense>
+    <Preload all />
+  </AnimatedThreeFiberCanvas>
+);
 
 export default BallCanvas;
